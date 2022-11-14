@@ -8,6 +8,7 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
+import android.media.AudioFormat
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
@@ -234,9 +235,13 @@ object Commons {
 
             fun pcmToWav(
                 pcmFilePath: String,
-                sampleRate: Int,
-                channels: Int,
-                bufferSize: Int,
+                sampleRate: Int = 44100,
+                channels: Int = AudioFormat.CHANNEL_IN_DEFAULT,
+                bufferSize: Int = android.media.AudioRecord.getMinBufferSize(
+                    44100,
+                    AudioFormat.CHANNEL_IN_DEFAULT,
+                    AudioFormat.ENCODING_PCM_16BIT
+                ),
                 deleteOrg: Boolean = true,
             ): String {
                 var fis: FileInputStream? = null
