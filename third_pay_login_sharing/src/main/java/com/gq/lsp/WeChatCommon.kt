@@ -8,10 +8,10 @@ import android.graphics.Bitmap
 import android.widget.Toast
 import com.google.gson.JsonParser
 import com.gq.api.TPLSApi
-import com.gq.basic.AppContext
-import com.gq.basic.common.GsonCommon
-import com.gq.basic.common.MetadataCommon
-import com.gq.basic.common.ToastCommon
+import com.gq.basicm3.AppContext
+import com.gq.basicm3.common.GsonCommon
+import com.gq.basicm3.common.MetadataCommon
+import com.gq.basicm3.common.ToastCommon
 import com.gq.data.WXPayData
 import com.gq.data.WXUserInfoData
 import com.tencent.mm.opensdk.constants.ConstantsAPI

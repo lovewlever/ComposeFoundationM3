@@ -1,9 +1,6 @@
 package com.gq.lsp;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
