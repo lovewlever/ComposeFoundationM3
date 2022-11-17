@@ -16,3 +16,4 @@ rootProject.name = "ComposeFoundationM3"
 include ':app'
 include ':remote_library'
 include ':composebasicm3'
+include ':third_pay_login_sharing'
