@@ -92,6 +92,7 @@ object WeChatCommon {
 
     /**
      * 微信分享
+     * [scene] SendMessageToWX.Req.WXSceneSession
      */
     fun shareToWeChatWebpage(title: String, description: String, shareUrl: String, bitmap: Bitmap, scene: Int) {
         val webpage = WXWebpageObject()
