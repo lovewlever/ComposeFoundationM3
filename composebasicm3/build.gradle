@@ -37,7 +37,57 @@ android {
     buildFeatures {
         compose true
     }
+    /*flavorDimensions 'v'
+    productFlavors {
+        vRelease {
+            dimension 'v'
+            versionNameSuffix ".${versionNameSuffixTime()}_release"
+            buildConfigField "long", "BuildTimestamp", "-1"
+            buildConfigField "boolean", "IsRelease", "true" // 是否是发布版
+            buildConfigField "String", "HostName", "\"http://crm.app12345.cn/\""
+            buildConfigField "String", "AppName", "\"\""
+            manifestPlaceholders = [appName: ""]
+        }
+
+        vPreview {
+            dimension 'v'
+            versionNameSuffix ".${versionNameSuffixTime()}_preview"
+            buildConfigField "long", "BuildTimestamp", "${releaseTime()}"
+            buildConfigField "boolean", "IsRelease", "false" // 是否是发布版
+            buildConfigField "String", "HostName", "\"http://crm.app12345.cn/\""
+            buildConfigField "String", "AppName", "\"\""
+            manifestPlaceholders = [appName: ""]
+        }
+
+        vDeveloper {
+            dimension 'v'
+            versionNameSuffix ".${versionNameSuffixTime()}_developer"
+            buildConfigField "long", "BuildTimestamp", "${releaseTime()}"
+            buildConfigField "boolean", "IsRelease", "false" // 是否是发布版
+            buildConfigField "String", "HostName", "\"http://192.168.3.113:8081/\""
+            buildConfigField "String", "AppName", "\"\""
+            manifestPlaceholders = [appName: ""]
+        }
+    }*/
+
+    /* applicationVariants.all { variant ->
+         variant.outputs.all { output -> //  ${variant.productFlavors[0].name}
+             def fileName = "appname_${variant.versionCode}_${variant.versionName}.apk"
+             def outFile = output.outputFile
+             if (outFile != null && outFile.name.endsWith('.apk')) {
+                 outputFileName = fileName
+             }
+         }
+     }*/
 }
+
+/*static long releaseTime() {
+    return new Date().time
+}
+
+def static versionNameSuffixTime() {
+    return new Date().format("MMddHHmm", TimeZone.getTimeZone("UTC"))
+}*/
 
 dependencies {
 
