@@ -84,6 +84,6 @@ fun HomePageCompose(navController: NavController) {
             Text(text = "1. 我们将申请权限")
         }, onDoneClick = {}, onRejectClick = {})
 
-        ToastCustomCompose(toastCustomState = toastCustomState)
+        //ToastCustomCompose(toastCustomState = toastCustomState)
     }
 }
