@@ -21,7 +21,7 @@ sealed class NavRouter(
  */
 fun enterTransition(): EnterTransition {
     return slideIn(animationSpec = spring(stiffness = 150F), initialOffset = {
-        IntOffset(x = 200, y = 0)
+        IntOffset(x = 150, y = 0)
     }) + fadeIn(animationSpec = tween(700))
 }
 
@@ -30,7 +30,7 @@ fun enterTransition(): EnterTransition {
  */
 fun popEnterTransition(): EnterTransition {
     return slideIn(animationSpec = spring(stiffness = 150F), initialOffset = {
-        IntOffset(x = -200, y = 0)
+        IntOffset(x = -150, y = 0)
     }) + fadeIn(animationSpec = tween(700))
 }
 
@@ -39,7 +39,7 @@ fun popEnterTransition(): EnterTransition {
  */
 fun exitTransition(): ExitTransition {
     return slideOut(animationSpec = spring(stiffness = 150F), targetOffset = {
-        IntOffset(x = -200, y = 0)
+        IntOffset(x = -150, y = 0)
     }) + fadeOut(targetAlpha = 0.5F, animationSpec = tween(500))
 }
 
@@ -48,7 +48,7 @@ fun exitTransition(): ExitTransition {
  */
 fun popExitTransition(): ExitTransition {
     return slideOut(animationSpec = spring(stiffness = 150F), targetOffset = {
-        IntOffset(x = 200, y = 0)
+        IntOffset(x = 150, y = 0)
     }) + fadeOut(animationSpec = tween(500))
 }
 
