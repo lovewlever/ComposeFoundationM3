@@ -9,6 +9,8 @@ import android.util.Size
 import androidx.documentfile.provider.DocumentFile
 import com.gq.basicm3.AppContext
 import com.gq.basicm3.common.DirCommon
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.*
 
 
@@ -48,6 +50,49 @@ fun Uri.getFileName(): String {
     return fileName?.substring(0, fileName.lastIndexOf(".")) ?: ""
 }
 
+suspend fun Uri.saveUriFileToAppLocalStorage(): Triple<Boolean, String, File?>  = withContext(Dispatchers.IO) {
+    val uri = this@saveUriFileToAppLocalStorage
+    val fileDescriptor = AppContext.application.contentResolver.openFileDescriptor(uri, "r")
+    fileDescriptor?.let {
+        saveFileToLocalStorage(uri.getFileExtensionName(), fileDescriptor)
+    } ?: Triple(false, "FileDescriptor is null", null)
+
+}
+
+private suspend fun saveFileToLocalStorage(
+    extensionName: String,
+    fileDescriptor: ParcelFileDescriptor
+): Triple<Boolean, String, File?> {
+    var fos: BufferedOutputStream? = null
+    var fis: BufferedInputStream? = null
+    try {
+        val storePath = DirCommon.getCacheDirFile("save_local_file").absolutePath ?: ""
+        val appDir = File(storePath)
+        if (!appDir.exists()) {
+            appDir.mkdir()
+        }
+
+        val fileName = "${System.currentTimeMillis()}.${extensionName}"
+        val file = File(appDir, fileName)
+
+        fos = BufferedOutputStream(FileOutputStream(file))
+        fis = BufferedInputStream(FileInputStream(fileDescriptor.fileDescriptor))
+        var byteRead: Int
+        while (fis.read().apply { byteRead = this } != -1) {
+            fos.write(byteRead)
+        }
+        fos.flush()
+        return Triple(true, "", file)
+    } catch (e: IOException) {
+        e.printStackTrace()
+        return Triple(false, "${e.message}", null)
+    } finally {
+        fis?.close()
+        fos?.close()
+    }
+}
+
+@Deprecated("use Uri.saveUriFileToAppLocalStorage()")
 fun List<Uri>.saveUriFileToAppLocalStorage(
     callback: (MutableList<File>) -> Unit,
     error: (Exception) -> Unit = {}
@@ -65,6 +110,7 @@ fun List<Uri>.saveUriFileToAppLocalStorage(
     }
 }
 
+@Deprecated("use Uri.saveUriFileToAppLocalStorage()")
 private fun saveFileToLocalStorage(
     extensionName: String,
     fileDescriptor: ParcelFileDescriptor,
